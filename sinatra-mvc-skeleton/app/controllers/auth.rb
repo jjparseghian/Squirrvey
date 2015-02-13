@@ -3,7 +3,6 @@ get '/signup' do
 end
 
 post '/signup' do
-  p params
   @new_user = User.new(params[:user])
   if @new_user.save
     session[:user_id] = @new_user.id
@@ -18,12 +17,16 @@ get '/login' do
 end
 
 post '/login' do
- p params
  @user = User.find_by(params[:id])
  if @user
   session[:user_id] = @user.id
-  redirect '/'
+  erb :'user_auth/logged_in'
  else
   puts "This is an error message"
  end
+end
+
+delete '/logout' do
+  session.clear
+  redirect '/'
 end
