@@ -18,7 +18,7 @@ end
 
 post '/login' do
   p params
- @user = User.find_by(name: params[:user][:name])
+ @user = User.find_by(email: params[:user][:email])
  if @user.try(:authenticate, params[:user][:password])
   session[:user_id] = @user.id
   erb :'user_auth/logged_in'
@@ -28,6 +28,8 @@ post '/login' do
 end
 
 delete '/logout' do
+  p params
   session.clear
+  p params
   redirect '/'
 end
