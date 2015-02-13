@@ -8,7 +8,7 @@ post '/signup' do
     session[:user_id] = @new_user.id
     redirect '/'
   else
-    puts "This is an error message"
+    erb :"user_auth/not_authorized"
   end
 end
 
@@ -17,12 +17,13 @@ get '/login' do
 end
 
 post '/login' do
- @user = User.find_by(params[:id])
- if @user
+  p params
+ @user = User.find_by(name: params[:user][:name])
+ if @user.try(:authenticate, params[:user][:password])
   session[:user_id] = @user.id
   erb :'user_auth/logged_in'
  else
-  puts "This is an error message"
+  erb :"user_auth/not_authorized"
  end
 end
 
