@@ -49,8 +49,8 @@ var surveyController = function(){
     $.ajax({
       url: '/survey/new.json',
       type: "POST",
-      dataType: "text",
-      data: dataOut,
+      dataType: "json",
+      data: {survey:dataOut},
       success: onSubmitSuccess,
       error: onSubmitError
 
