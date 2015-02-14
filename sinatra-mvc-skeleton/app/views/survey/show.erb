@@ -1,0 +1,25 @@
+<div>
+   <ol>
+    <% @survey.questions.each do |question| %>
+      <li><%= question.text %></li>
+        <% question.answers.each do |answer| %>
+        <!-- add logic to get current user id -->
+        <form class="question_answers" action="/surveys/<%= @survey.id %>" method="post">
+          <div class="col-lg-6">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <input type="radio" name="survey<%=@survey.id%>" value="<%= answer.id %>">
+              </span>
+              <span class="form-control" aria-label="..."><%= answer.text %></span>
+            </div><!-- /input-group -->
+          </div><!-- /.col-lg-6 -->
+      <% end %>
+      </form>
+    <% end %>
+  </ol>
+  <input id="forms_submit_button" type="submit" value="Submit Answers">
+</div>
+
+
+
+
