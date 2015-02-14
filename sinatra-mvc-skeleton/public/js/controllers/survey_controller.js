@@ -45,7 +45,7 @@ var surveyController = function(){
   var submit = function(){
     dataOut = JSON.stringify(survey);
     $.ajax({
-      url: '/survey/new.json',
+      url: '/surveys/new.json',
       type: "POST",
       dataType: "json",
       data: {survey:dataOut},
