@@ -72,7 +72,9 @@ var surveyController = function(){
 
       $.tmpl( $("#template-answer"),  getReplaceData(question,answer) )
           .appendTo( getQuestionPanelId(question.id));
-      attachListeners(question,answer);
+
+
+      attachListeners(null,answer);
   }
 
   var addAnswer = function(e){
@@ -124,14 +126,21 @@ var surveyController = function(){
 
 
   var attachListeners = function(question,answer){
+       if(answer!= null){
+         $('#delete-answer-button-'+answer.id).on('click', removeAnswer);
+          attachAnswerListener(answer);
+       }
 
-      $('#add-answer-button-'+question.id).on('click', addAnswer);
-      $('#delete-answer-button-'+answer.id).on('click', removeAnswer);
-      $('#delete-question-button-'+question.id).on('click', removeQuestion);
-      $("#question-"+question.id).change( function(){
-        question.text = this.value;
-        });
-      attachAnswerListener(answer);
+      if(question!= null){
+        $('#add-answer-button-'+question.id).on('click', addAnswer);
+
+        $('#delete-question-button-'+question.id).on('click', removeQuestion);
+        $("#question-"+question.id).change( function(){
+          question.text = this.value;
+          });
+      }
+
+
   }
   var attachAnswerListener = function(answer){
     $("#answer-"+answer.id).change(function(){
