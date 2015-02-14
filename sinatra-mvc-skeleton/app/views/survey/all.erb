@@ -1,7 +1,8 @@
-<div>
+<div class="col-md-offset-5 col-md-5">
+  <h2>Squirrveys</h2>
   <ol>
     <% @surveys.each do |survey| %>
-      <a href="/surveys/<%= survey.id %>"><li><%= survey.title %></li></a>
+      <a class="lead" href="/surveys/<%= survey.id %>"><li><%= survey.title %></li></a>
     <% end %>
   </ol>
 </div>

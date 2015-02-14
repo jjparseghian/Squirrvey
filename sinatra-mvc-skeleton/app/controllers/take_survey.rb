@@ -20,13 +20,12 @@ get '/surveys/:id' do |id|
 end
 
 post '/surveys/:id' do |id|
-  (auth: :user)
 
   params.each do |key,value|
     if key.include? 'answer_id'
       user_answer_map = {user_id: current_user.id, answer_id: value}
       user_answer = UserAnswers.create(user_answer_map)
     end
-   end
+  end
   redirect "/surveys/all"
 end
