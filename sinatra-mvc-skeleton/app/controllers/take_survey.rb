@@ -30,6 +30,6 @@ post '/surveys/:id' do |id|
       user_answer_map = {user_id: 1, answer_id: value}
       user_answer = UserAnswers.create(user_answer_map)
     end
-
    end
+  redirect "/surveys/all"
 end
