@@ -18,7 +18,7 @@ var deleteFromArrayById = function(array, id){
     }
   });
   if(index>-1){
-    questions.splice(index,1);
+    array.splice(index,1);
   }
 }
 
@@ -65,8 +65,7 @@ Question.prototype.addNewAnswer = function(){
 
 Question.prototype.setSequence = function(sequence){
   this.sequence = sequence;
-  //TODO this is a hack for now
-  this.id = sequence;
+
 }
 
 
@@ -91,7 +90,7 @@ Survey.prototype.addNewQuestion = function(){
 }
 
 Survey.prototype.deleteQuestion = function(question_id){
-  deleteFromArrayById(questions,question_id);
+  deleteFromArrayById(this.questions,question_id);
 }
 
 Survey.prototype.getQuestionById = function(id){

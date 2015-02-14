@@ -51,45 +51,73 @@ var surveyController = function(){
 
     });
   }
-  var addAnswer = function(e){
-      //add to question-panel-seq
-      var id  = getAttributeInt(this,"data-question-id");
-      var question = survey.getQuestionById(id);
+
+  var getQuestionPanelId = function(id){
+    var panel_id = "#question-panel-"+id;
+    return panel_id;
+  }
+
+  var addAnswerByQuestionId = function(id){
+    var question = survey.getQuestionById(id);
       if(question.isQuestionLimitReached()){
         alert("We support only 4 answers now.")
         return;
       }
       var answer = question.addNewAnswer();
-      var panel_id = "#question-panel-"+id;
-     var data = {
+
+      $.tmpl( $("#template-answer"),  getReplaceData(question,answer) )
+          .appendTo( getQuestionPanelId(question.id));
+  }
+
+  var addAnswer = function(e){
+      //add to question-panel-seq
+      var id  = getAttributeInt(this,"data-question-id");
+      addAnswerByQuestionId(id);
+  };
+
+  var removeQuestion = function(){
+    var id  = getAttributeInt(this,"data-question-id");
+    survey.deleteQuestion(id);
+    var panelId = "#single-question-panel-"+id;
+    var answerId = "#question-panel-"+id;
+    $(panelId).remove();
+    $(answerId).remove();
+  }
+
+  var removeAnswer = function(){
+    var id  = getAttributeInt(this,"data-question-id");
+    var answerId  = getAttributeInt(this,"data-answer-id");
+    var answerPanelId = "answer-panel-"+answerId;
+     $(answerPanelId).remove();
+  }
+
+  var getReplaceData = function(question, answer){
+       var data = {
         questionNumber: question.sequence,
         answerLetter: answer.letter,
-        questionId: question.id
+        questionId: question.id,
+        answerId: answer.id
     };
-
-      $.tmpl( $("#template-answer"), data )
-          .appendTo( panel_id);
-  };
+    return data;
+  }
 
   var addQuestion = function(){
     var question = survey.addNewQuestion();
     var answer = question.addNewAnswer();
 
-    var data = {
-        questionNumber: question.sequence,
-        answerLetter: answer.letter,
-        questionId: question.id
-    };
+
 
       // Render the template with the movies data and insert
       // the rendered HTML under the "movieList" element
-      $.tmpl( $("#template-question"), data )
+      $.tmpl( $("#template-question"), getReplaceData(question,answer) )
           .appendTo( "#questions-panel" );
 
-      $.tmpl( $("#template-answer"), data )
-          .appendTo( "#question-panel-"+question.id );
+      $.tmpl( $("#template-answer"),  getReplaceData(question,answer) )
+          .appendTo( getQuestionPanelId(question.id));
 
       $('#add-answer-button-'+question.id).on('click', addAnswer);
+      $('#delete-answer-button-'+answer.id).on('click', removeAnswer);
+      $('#delete-question-button-'+question.id).on('click', removeQuestion);
 
   }
 

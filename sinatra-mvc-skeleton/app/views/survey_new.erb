@@ -12,34 +12,37 @@
 
 <!--<template id="question_template">-->
       <script type="text/html" id="template-answer">
-                         <div class="col-md-5 answer-offset">
+                         <div class="col-md-5 answer-offset" id="answer-panel-${answerId}">
                             <div class="input-group navbar-form pull-left survey-answers" >
                                  <span class="input-group-addon" id="basic-addon1">${answerLetter}.</span >
                                  <input type="text" class="form-control" placeholder="Enter Answer Text Here" aria-describedby="basic-addon2">
-                                <button type="button" class="btn btn-default left-margin-5 delete-answer-button" >Delete</button>
+                                <button type="button" class="btn btn-default left-margin-5 delete-answer-button" data-question-id="${questionId}" >Delete</button>
 
                             </div>
                           </div>
         </script>
 
         <script type="text/html" id="template-question">
-            <div class="row top-margin-5 survey-questions" >
-                          <div class="col-md-6 question-offset">
+            <div class="row top-margin-5 survey-questions" id="single-question-panel-${questionId}">
+                          <div class="col-md-6 question-offset" >
                             <div class="input-group navbar-form pull-left">
                               <span class="input-group-addon" id="basic-addon">${questionNumber}.</span>
                               <input type="text" class="form-control" placeholder="Enter Question Here" aria-describedby="basic-addon2">
 
-                                <button type="button" class="btn btn-default left-margin-5 delete-question-button" id="delete-question-button-${questionId}">Delete</button>
+                                <button type="button" class="btn btn-default left-margin-5 delete-question-button"
+                                id="delete-question-button-${questionId}"
+                                data-question-id="${questionId}"
+                                data-answer-id="${answerId}"
+                                >Delete</button>
                                 <button type="button" class="btn btn-default left-margin-5 add-answer-button"
                                 data-question-id="${questionId}"
                                 id="add-answer-button-${questionId}">Add Answer</button>
                             </div>
                           </div><!-- /.col-lg-6 -->
-                        </div><!-- /.row -->
 
+                        </div><!-- /.row -->
                         <div class="row" id="question-panel-${questionId}" data-question-id="${questionId}">
                         </div>
-
               </div>
             </div>
         </script>
