@@ -1,13 +1,11 @@
 var surveyController = function(){
 
   var survey = null;
-  var addQuestionButton = null;
-  var submtButtonArg = null;
   var view = viewer;
 
    var setupView = function(){
-    addQuestionButton = $('#add-question-button');
-    submtButton = $('#button-survey-submit');
+    var addQuestionButton = $('#add-question-button');
+    var submtButton = $('#button-survey-submit');
 
     addQuestionButton.on('click', addQuestion);
     submtButton.on('click', submit);
