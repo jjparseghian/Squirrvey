@@ -1,14 +1,17 @@
 $(document).ready(function() {
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
+  if ($('#button-survey-submit').length>0){
+    var controller = surveyController;
+    controller.setup();
+  }
 
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
-
-  $('#forms_submit_button').click(function(){
+ if( $('#forms_submit_button').length>0){
+    $('#forms_submit_button').click(function(){
     $('form').each(function(){
         $(this).submit();
     });
-});
+  });
+ }
+
+
 });
 

@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="input-group navbar-form pull-left">
+      <input type="text" class="form-control" placeholder="Enter Survey Title Here" aria-describedby="basic-addon2" id="survey-title">
+      <button type="button" class="btn btn-default left-margin-5" id="add-question-button">Add Question</button>
+    </div>
+ </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+
+<div class="panel panel-default top-margin-5">
+  <div class="panel-body" id="questions-panel">
+
+<!--<template id="question_template">-->
+      <script type="text/html" id="template-answer">
+                         <div class="col-md-5 answer-offset" id="answer-panel-${answerId}">
+                            <div class="input-group navbar-form pull-left survey-answers" >
+                                 <span class="input-group-addon" id="basic-addon1">${answerLetter}.</span >
+                                 <input type="text" class="form-control"
+                                       placeholder="Enter Answer Text Here" aria-describedby="basic-addon2"
+                                        data-question-id="${questionId}"
+                                        data-answer-id="${answerId}"
+                                        id="answer-${answerId}"
+                                >
+                                <button type="button" class="btn btn-default left-margin-5 delete-answer-button" data-question-id="${questionId}" >Delete</button>
+
+                            </div>
+                          </div>
+        </script>
+
+        <script type="text/html" id="template-question">
+            <div class="row top-margin-5 survey-questions" id="single-question-panel-${questionId}">
+                          <div class="col-md-6 question-offset" >
+                            <div class="input-group navbar-form pull-left">
+                              <span class="input-group-addon" id="basic-addon">${questionNumber}.</span>
+                              <input type="text" class="form-control" placeholder="Enter Question Here"
+                                      aria-describedby="basic-addon2" id="question-${questionId}" data-question-id="${questionId}">
+
+                                <button type="button" class="btn btn-default left-margin-5 delete-question-button"
+                                id="delete-question-button-${questionId}"
+                                data-question-id="${questionId}">Delete</button>
+                                <button type="button" class="btn btn-default left-margin-5 add-answer-button"
+                                data-question-id="${questionId}"
+                                id="add-answer-button-${questionId}">Add Answer</button>
+                            </div>
+                          </div><!-- /.col-lg-6 -->
+
+                        </div><!-- /.row -->
+                        <div class="row" id="question-panel-${questionId}" data-question-id="${questionId}">
+                        </div>
+              </div>
+            </div>
+        </script>
+<!-- </template> -->
+  </div>
+</div>
+
+ <div class="row">
+  <div class="col-md-12">
+    <button type="button" class="btn btn-default left-margin-5" id="button-survey-submit">Submit</button>
+  <div class="col-md-12">
+</div>
