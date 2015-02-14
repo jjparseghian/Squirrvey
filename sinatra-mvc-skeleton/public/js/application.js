@@ -4,4 +4,11 @@ $(document).ready(function() {
   // when we try to bind to them
 
   // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+
+  $('#forms_submit_button').click(function(){
+    $('form').each(function(){
+        $(this).submit();
+    });
 });
+});
+
