@@ -15,7 +15,12 @@
                          <div class="col-md-5 answer-offset" id="answer-panel-${answerId}">
                             <div class="input-group navbar-form pull-left survey-answers" >
                                  <span class="input-group-addon" id="basic-addon1">${answerLetter}.</span >
-                                 <input type="text" class="form-control" placeholder="Enter Answer Text Here" aria-describedby="basic-addon2">
+                                 <input type="text" class="form-control"
+                                       placeholder="Enter Answer Text Here" aria-describedby="basic-addon2"
+                                        data-question-id="${questionId}"
+                                        data-answer-id="${answerId}"
+                                        id="answer-${answerId}"
+                                >
                                 <button type="button" class="btn btn-default left-margin-5 delete-answer-button" data-question-id="${questionId}" >Delete</button>
 
                             </div>
@@ -27,13 +32,12 @@
                           <div class="col-md-6 question-offset" >
                             <div class="input-group navbar-form pull-left">
                               <span class="input-group-addon" id="basic-addon">${questionNumber}.</span>
-                              <input type="text" class="form-control" placeholder="Enter Question Here" aria-describedby="basic-addon2">
+                              <input type="text" class="form-control" placeholder="Enter Question Here"
+                                      aria-describedby="basic-addon2" id="question-${questionId}" data-question-id="${questionId}">
 
                                 <button type="button" class="btn btn-default left-margin-5 delete-question-button"
                                 id="delete-question-button-${questionId}"
-                                data-question-id="${questionId}"
-                                data-answer-id="${answerId}"
-                                >Delete</button>
+                                data-question-id="${questionId}">Delete</button>
                                 <button type="button" class="btn btn-default left-margin-5 add-answer-button"
                                 data-question-id="${questionId}"
                                 id="add-answer-button-${questionId}">Add Answer</button>

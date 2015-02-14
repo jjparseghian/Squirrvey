@@ -72,6 +72,7 @@ Question.prototype.setSequence = function(sequence){
 Question.prototype.deleteAnswer = function(answer_id){
   deleteFromArrayById(questions,answer_id);
   //TODO reassign letters
+
 }
 
 

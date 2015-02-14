@@ -3,6 +3,7 @@ var surveyController = function(){
   var survey = null;
   var addQuestionButton = null;
   var submtButtonArg = null;
+  var view = viewer;
 
    var setupView = function(){
     addQuestionButton = $('#add-question-button');
@@ -10,7 +11,10 @@ var surveyController = function(){
 
     addQuestionButton.on('click', addQuestion);
     submtButton.on('click', submit);
-    $("#template").template("template-name");
+
+    $("#survey-title").change( function(){
+      survey.title = this.value;
+    });
   }
 
   var setup = function(survey_id){
@@ -18,6 +22,7 @@ var surveyController = function(){
       survey = new Survey();
     }
     setupView();
+    addQuestion();
   }
 
   var onSubmitSuccess = function(response){
@@ -25,9 +30,9 @@ var surveyController = function(){
     alert('Your survey has been saved');
   }
 
-  var onSubmitError = function(respone){
+  var onSubmitError = function(response){
     console.log(response);
-    alert('Your HAS NOT been saved');
+    alert('Your survey HAS NOT been saved');
   }
 
   var getAttributeInt = function(html,attrName){
@@ -42,9 +47,9 @@ var surveyController = function(){
   var submit = function(){
     dataOut = JSON.stringify(survey);
     $.ajax({
-      url: '/',
+      url: '/survey/new.json',
       type: "POST",
-      dataType: "json",
+      dataType: "text",
       data: dataOut,
       success: onSubmitSuccess,
       error: onSubmitError
@@ -67,6 +72,7 @@ var surveyController = function(){
 
       $.tmpl( $("#template-answer"),  getReplaceData(question,answer) )
           .appendTo( getQuestionPanelId(question.id));
+      attachListeners(question,answer);
   }
 
   var addAnswer = function(e){
@@ -105,8 +111,6 @@ var surveyController = function(){
     var question = survey.addNewQuestion();
     var answer = question.addNewAnswer();
 
-
-
       // Render the template with the movies data and insert
       // the rendered HTML under the "movieList" element
       $.tmpl( $("#template-question"), getReplaceData(question,answer) )
@@ -114,12 +118,29 @@ var surveyController = function(){
 
       $.tmpl( $("#template-answer"),  getReplaceData(question,answer) )
           .appendTo( getQuestionPanelId(question.id));
+      attachListeners(question,answer);
+
+  }
+
+
+  var attachListeners = function(question,answer){
 
       $('#add-answer-button-'+question.id).on('click', addAnswer);
       $('#delete-answer-button-'+answer.id).on('click', removeAnswer);
       $('#delete-question-button-'+question.id).on('click', removeQuestion);
-
+      $("#question-"+question.id).change( function(){
+        question.text = this.value;
+        });
+      attachAnswerListener(answer);
   }
+  var attachAnswerListener = function(answer){
+    $("#answer-"+answer.id).change(function(){
+          answer.text = this.value;
+      });
+  }
+
+
+
 
 
 

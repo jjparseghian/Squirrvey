@@ -1,7 +1,6 @@
-var view = (function(){
+var viewer = (function(){
 
 
-  //TODO move view related stuff here
   return {
 
   }
