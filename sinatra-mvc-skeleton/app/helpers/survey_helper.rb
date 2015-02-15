@@ -3,7 +3,7 @@ def createFromJson(args)
   #   return nil
   # end
   #TODO use actual logged in user
-  user_id = 1#current_user.id
+  user_id = current_user.id
   survey = Survey.create({:title=>args["title"], user_id: user_id})
   args["questions"].each do |question|
     questionRecord = Question.create({text: question["text"], survey_id: survey.id});
