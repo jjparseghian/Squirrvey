@@ -5,11 +5,17 @@ get '/surveys/new' do
 end
 
 post '/surveys/new.json' do
+  if current_user == nil
+    return 403 #not authorized
+  end
   p params
-
   args = JSON.parse(params["survey"]);
   survey = createFromJson(args);
   p survey
-  {survey_id:survey.id}.to_json
+  if survey
+    {survey_id:survey.id}.to_json
+  end
+    {error: 'not saved'}.to_json
+
 end
 
