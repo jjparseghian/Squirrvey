@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "Auth Controller" do
-let(:user) {User.create(name: "Bill Clinton", email: "billclinton@email.com", password: "politics")}
+let(:user) {User.new}
 
 before do
   user
@@ -14,10 +14,29 @@ end
     end
   end
 
+  describe "POST /signup" do
+    it "should successfully redirect after user created" do
+      post '/signup'
+      expect(last_response).to be_redirect
+      follow_redirect!
+      last_request.path.should == '/surveys/all'
+    end
+  end
+
   describe "GET /login" do
     it "loads the login page" do
       get '/login'
       expect(last_response).to be_ok
+    end
+  end
+
+  describe "POST /login" do
+    it 'redirects to the survey options page'do
+     user_attributes = { email: "billclinton@email.com", password: "politics" }
+     post '/login', user: user_attributes
+     expect(last_response).to be_redirect
+     follow_redirect!
+     last_request.path.should == '/surveys/all'
     end
   end
 
@@ -29,13 +48,4 @@ end
       last_request.path.should == '/'
     end
   end
-
-  describe "POST /signup" do
-    it "should successfully redirect after user created" do
-      post '/signup'
-      expect(last_response).to be_redirect
-      follow_redirect!
-      last_request.path.should == '/'
-  end
- end
 end
