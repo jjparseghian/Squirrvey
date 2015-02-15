@@ -15,7 +15,7 @@
                          <div class="col-md-5 answer-offset" id="answer-panel-${answerId}">
                             <div class="input-group navbar-form pull-left survey-answers" >
                                  <span class="input-group-addon" id="basic-addon1">${answerLetter}.</span >
-                                 <input type="text" class="form-control"
+                                 <input type="text" class="form-control" style="width:70%"
                                        placeholder="Enter Answer Text Here" aria-describedby="basic-addon2"
                                         data-question-id="${questionId}"
                                         data-answer-id="${answerId}"
@@ -29,10 +29,10 @@
 
         <script type="text/html" id="template-question">
             <div class="row top-margin-5 survey-questions" id="single-question-panel-${questionId}">
-                          <div class="col-md-6 question-offset" >
+                          <div class="question-offset" >
                             <div class="input-group navbar-form pull-left">
                               <span class="input-group-addon" id="basic-addon">${questionNumber}.</span>
-                              <input type="text" class="form-control" placeholder="Enter Question Here"
+                              <input type="text" class="form-control" style="width:70%" placeholder="Enter Question Here"
                                       aria-describedby="basic-addon2" id="question-${questionId}" data-question-id="${questionId}">
 
                                 <button type="button" class="btn btn-default left-margin-5 delete-question-button"
